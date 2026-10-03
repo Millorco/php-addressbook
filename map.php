@@ -102,7 +102,7 @@
   // print_r($coords);
 
   ?>
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=<? echo $google_maps_key; ?>" type="text/javascript"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=<?php echo $google_maps_key; ?>" type="text/javascript"></script>
 
     <script type="text/javascript">
 

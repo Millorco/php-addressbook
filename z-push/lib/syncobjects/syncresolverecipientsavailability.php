@@ -51,7 +51,7 @@ class SyncRRAvailability extends SyncObject {
     public $status;
     public $mergedfreebusy;
 
-    public function SyncRRAvailability() {
+    public function __construct() {
         $mapping = array (
             SYNC_RESOLVERECIPIENTS_STARTTIME                => array (  self::STREAMER_VAR      => "starttime"),
             SYNC_RESOLVERECIPIENTS_ENDTIME                  => array (  self::STREAMER_VAR      => "endtime"),
@@ -59,7 +59,7 @@ class SyncRRAvailability extends SyncObject {
             SYNC_RESOLVERECIPIENTS_MERGEDFREEBUSY           => array (  self::STREAMER_VAR      => "mergedfreebusy"),
         );
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 
 }

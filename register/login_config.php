@@ -1,6 +1,8 @@
 <?php
 
 include "../config/config.php";
+// Legacy mysql_* calls of this module run on top of mysqli (PHP 7+)
+require_once dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."include".DIRECTORY_SEPARATOR."mysql_shim.php";
 
 //**NOTE: No space can exist before <?PHP above or it will mess up the headers***
 
@@ -11,9 +13,10 @@ $sitename     = $_SERVER['SERVER_NAME'];
 
 //**STEP 2: What is the site domain for emails?  No http://www.  Just something.com
 // $email_domain = $_SERVER['SERVER_NAME'];
+if(!isset($email_domain)) $email_domain = $_SERVER['SERVER_NAME'];
 
 //**STEP 3: What is the full path to the folder where the login script is located? I.E. https://www.yoursite.com/login_app
-if($_SERVER['HTTPS']) {
+if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
   $domain = "https://".$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 } else {
   $domain = "http://".$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
@@ -53,7 +56,7 @@ $return_path_email = "bounce@$email_domain";
 $forgot_password_email_subject = "Your $sitename password";
 
 //**NO NEED TO CHANGE THIS
-$email_4_pw_email = trim($_REQUEST['email']);
+$email_4_pw_email = (isset($_REQUEST['email']) ? trim($_REQUEST['email']) : '');
 
 if($email_4_pw_email !==''){
 

@@ -61,7 +61,7 @@ class SyncTaskRecurrence extends SyncObject {
     public $deadoccur;
     public $calendartype;
 
-    function SyncTaskRecurrence() {
+    function __construct() {
         $mapping = array (
                     SYNC_POOMTASKS_START                                => array (  self::STREAMER_VAR      => "start",
                                                                                     self::STREAMER_TYPE     => self::STREAMER_TYPE_DATE),
@@ -128,7 +128,7 @@ class SyncTaskRecurrence extends SyncObject {
             $mapping[SYNC_POOMTASKS_CALENDARTYPE]                       = array (   self::STREAMER_VAR      => "calendartype");
         }
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 
     /**

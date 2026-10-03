@@ -1,12 +1,17 @@
 <?php
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "mysqli.database.php";
+
 if (!function_exists('mysql_connect')) {
     function mysql_connect($server, $username, $password, $new_link = false, $client_flags = 0) {
-        try {
-            $GLOBALS['mysql_mysqli_link'] = mysqli_connect($server, $username, $password);
-        } catch (Exception $e) {
-            $GLOBALS['mysql_mysqli_link'] = false;
-        }
+        // Same connection handling as the DBAL (legacy error mode, "host:port")
+        $db_access = new MysqliDatabase();
+        $GLOBALS['mysql_mysqli_link'] = $db_access->connect($server, $username, $password);
         return $GLOBALS['mysql_mysqli_link'];
+    }
+    function mysql_set_charset($charset, $link_identifier = null) {
+        if ($link_identifier === null) $link_identifier = (isset($GLOBALS['mysql_mysqli_link']) ? $GLOBALS['mysql_mysqli_link'] : null);
+        if (!($link_identifier instanceof mysqli)) return false;
+        return mysqli_set_charset($link_identifier, $charset);
     }
     function mysql_select_db($database_name, $link_identifier = null) {
         if ($link_identifier === null) $link_identifier = (isset($GLOBALS['mysql_mysqli_link']) ? $GLOBALS['mysql_mysqli_link'] : null);
@@ -45,7 +50,7 @@ if (!function_exists('mysql_connect')) {
     }
     function mysql_errno($link_identifier = null) {
         if ($link_identifier === null) $link_identifier = (isset($GLOBALS['mysql_mysqli_link']) ? $GLOBALS['mysql_mysqli_link'] : null);
-        if (!($link_identifier instanceof mysqli)) return 0;
+        if (!($link_identifier instanceof mysqli)) return mysqli_connect_errno();
         return mysqli_errno($link_identifier);
     }
     function mysql_real_escape($unescaped_string, $link_identifier = null) { return mysql_real_escape_string($unescaped_string, $link_identifier); }

@@ -1,4 +1,4 @@
-<? 
+<?php 
 //Set permission level threshold for this page remove if page is good for all levels
 $permission_level=5;
 
@@ -22,9 +22,9 @@ include"auth_check_header.php";
       </font></font></strong>
     </div>
       <div style="text-align:left; width:100%; margin-top:10px;">
-        <p align="center"><? include"include_menu.php"; ?></p>
+        <p align="center"><?php include"include_menu.php"; ?></p>
         <p align="center">
-          <?
+          <?php
 			  
 			  
 			  $id = $_REQUEST['id'];

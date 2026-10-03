@@ -19,7 +19,7 @@ class TestReadWebpage extends WebTestCase {
 		      && strlen($_SERVER['HTTPS']) > 0 ? "https" : "http")
 		    . "://"
 		    . $_SERVER['SERVER_NAME']
-			  . dirname($_SERVER['REQUEST_URI']);
+			  . rtrim(str_replace("\\", "/", dirname($_SERVER["REQUEST_URI"])), "/");
 
 			  $this->get( $this->book_root_url
 			            . "/index.php?lang=en" );

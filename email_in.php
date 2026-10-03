@@ -109,7 +109,7 @@ foreach($flattenedParts as $partNumber => $part) {
               	if(function_exists('mb_convert_encoding')) {
               	  $message = mb_convert_encoding ($message, "UTF-8", strtoupper($charset));
                 } else {
-              	  $message = utf8_encode($message);
+              	  $message = mb_convert_encoding($message, "UTF-8", "ISO-8859-1");
               	}
               }
             }

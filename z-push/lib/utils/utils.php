@@ -713,9 +713,9 @@ class Utils {
      */
     public static function GetFormattedTime($timestamp = false) {
         if (!$timestamp)
-            return @strftime("%d/%m/%Y %H:%M:%S");
+            return date("d/m/Y H:i:s");
         else
-            return @strftime("%d/%m/%Y %H:%M:%S", $timestamp);
+            return date("d/m/Y H:i:s", $timestamp);
     }
 
 
@@ -883,7 +883,7 @@ class Utils {
      * @return boolean
      */
     public static function FixFileOwner($file) {
-        if(posix_getuid() == 0 && file_exists($file)) {
+        if(function_exists("posix_getuid") && posix_getuid() == 0 && file_exists($file)) {
             $dir = dirname($file);
             $perm_dir = stat($dir);
             $perm_file = stat($file);
@@ -991,7 +991,7 @@ function utf8_to_windows1252($string, $option = "", $force_convert = false) {
     if (function_exists("iconv")){
         return @iconv("UTF-8", "Windows-1252" . $option, $string);
     }else{
-        return utf8_decode($string); // no euro support here
+        return mb_convert_encoding($string, "ISO-8859-1", "UTF-8"); // no euro support here
     }
 }
 
@@ -1002,7 +1002,7 @@ function windows1252_to_utf8($string, $option = "", $force_convert = false) {
     if (function_exists("iconv")){
         return @iconv("Windows-1252", "UTF-8" . $option, $string);
     }else{
-        return utf8_encode($string); // no euro support here
+        return mb_convert_encoding($string, "UTF-8", "ISO-8859-1"); // no euro support here
     }
 }
 

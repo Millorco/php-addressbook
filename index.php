@@ -14,7 +14,7 @@
 		<input name="submitsearch" type="submit" value="<?php echo ucfirst(msg('SEARCH')) ?>" />    
 	</form>
 <?php
-$link = "index${page_ext_qry}alphabet";
+$link = "index{$page_ext_qry}alphabet";
 echo "<div id='a-z'><a href='$link=a'>A</a> | <a href='$link=b'>B</a> | <a href='$link=c'>C</a> | <a href='$link=d'>D</a> | <a href='$link=e'>E</a> | <a href='$link=f'>F</a> | <a href='$link=g'>G</a> | <a href='$link=h'>H</a> | <a href='$link=i'>I</a> | <a href='$link=j'>J</a> | <a href='$link=k'>K</a> | <a href='$link=l'>L</a> | <a href='$link=m'>M</a> | <a href='$link=n'>N</a> | <a href='$link=o'>O</a> | <a href='$link=p'>P</a> | <a href='$link=q'>Q</a> | <a href='$link=r'>R</a> | <a href='$link=s'>S</a> | <a href='$link=t'>T</a> | <a href='$link=u'>U</a> | <a href='$link=v'>V</a> | <a href='$link=w'>W</a> | <a href='$link=x'>X</a> | <a href='$link=y'>Y</a> | <a href='$link=z'>Z</a> | <a href='index$page_ext'>".ucfmsg('ALL')."</a></div>" ;
 } else { 
 ?>
@@ -168,7 +168,7 @@ function addRow($row) {
         break;
       case "email":
       case "email2":
-        echo "<td><a href='".getMailer()."${$row}'>${$row}</a></td>";
+        echo "<td><a href='".getMailer()."{${$row}}'>{${$row}}</a></td>";
         break;
       case "all_phones":
         $phones = $addr->shortPhones();
@@ -186,19 +186,19 @@ function addRow($row) {
   		  echo "<td>".str_replace("\n", "<br>", $address)."</td>";
   		  break;
       case "edit":
-        echo "<td class='center'><a href='view${page_ext_qry}id=$id'><img src='${url_images}icons/status_online.png' title='".ucfmsg('DETAILS')."' alt='".ucfmsg('DETAILS')."' /></a></td>";
+        echo "<td class='center'><a href='view{$page_ext_qry}id=$id'><img src='{$url_images}icons/status_online.png' title='".ucfmsg('DETAILS')."' alt='".ucfmsg('DETAILS')."' /></a></td>";
         if(! $read_only) {
-          echo "<td class='center'><a href='edit${page_ext_qry}id=$id'><img src='${url_images}icons/pencil.png' title='".ucfmsg('EDIT')."' alt='".ucfmsg('EDIT')."'/></a></td>";
+          echo "<td class='center'><a href='edit{$page_ext_qry}id=$id'><img src='{$url_images}icons/pencil.png' title='".ucfmsg('EDIT')."' alt='".ucfmsg('EDIT')."'/></a></td>";
         }
   		  break;
       case "vcard":
-        echo "<td class='center'><a href='vcard${page_ext_qry}id=$id'><img src='${url_images}icons/vcard.png' title='vCard' alt='vCard'/></a></td>";        
+        echo "<td class='center'><a href='vcard{$page_ext_qry}id=$id'><img src='{$url_images}icons/vcard.png' title='vCard' alt='vCard'/></a></td>";        
   	    break;
       case "map":      
         if($map_guess) {
           if($myrow["address"] != "")
           echo "<td class='center'><a href='http://maps.google.com/maps?q=".urlencode(trim(str_replace("\r\n", ", ", trim($myrow["address"]))))."&amp;t=h' target='_blank'>
-                                <img src='${url_images}icons/car.png' title='Google Maps' alt='vCard'/></a></td>";
+                                <img src='{$url_images}icons/car.png' title='Google Maps' alt='vCard'/></a></td>";
           else echo "<td/>";
         }
         break;
@@ -207,19 +207,19 @@ function addRow($row) {
         	  $homepage = (strcasecmp(substr($homepage, 0, strlen("http")),"http")== 0
         	              ? $homepage
         	              : "http://".$homepage);
-            echo "<td class='center'><a href='$homepage'><img src='${url_images}icons/house.png' title='$homepage' alt='$homepage'/></a></td>";
+            echo "<td class='center'><a href='$homepage'><img src='{$url_images}icons/house.png' title='$homepage' alt='$homepage'/></a></td>";
         } elseif($homepage_guess && ($homepage = guessHomepage($email, $email2)) != "") {
-            echo "<td class='center'><a href='http://$homepage'><img src='${url_images}icons/house.png' title='".ucfmsg("GUESSED_HOMEPAGE")." ($homepage)' alt='".ucfmsg("GUESSED_HOMEPAGE")." ($homepage)'/></a></td>";
+            echo "<td class='center'><a href='http://$homepage'><img src='{$url_images}icons/house.png' title='".ucfmsg("GUESSED_HOMEPAGE")." ($homepage)' alt='".ucfmsg("GUESSED_HOMEPAGE")." ($homepage)'/></a></td>";
         } else {
         	echo "<td/>";
         }		    
   		  break;
       case "details":
-        echo "<td class='center'><a href='vcard${page_ext_qry}id=$id'><img src='${url_images}icons/vcard.png' title='vCard' alt='vCard'/></a></td>";        
+        echo "<td class='center'><a href='vcard{$page_ext_qry}id=$id'><img src='{$url_images}icons/vcard.png' title='vCard' alt='vCard'/></a></td>";        
         if($map_guess) {
           if($myrow["address"] != "")
           echo "<td class='center'><a href='http://maps.google.com/maps?q=".urlencode(trim(str_replace("\r\n", ", ", trim($myrow["address"]))))."&amp;t=h' target='_blank'>
-                                <img src='${url_images}icons/car.png' title='Google Maps' alt='vCard'/></a></td>";
+                                <img src='{$url_images}icons/car.png' title='Google Maps' alt='vCard'/></a></td>";
           else echo "<td/>";
         }
         
@@ -227,15 +227,15 @@ function addRow($row) {
         	  $homepage = (strcasecmp(substr($homepage, 0, strlen("http")),"http")== 0
         	              ? $homepage
         	              : "http://".$homepage);
-            echo "<td class='center'><a href='$homepage'><img src='${url_images}icons/house.png' title='$homepage' alt='$homepage'/></a></td>";
+            echo "<td class='center'><a href='$homepage'><img src='{$url_images}icons/house.png' title='$homepage' alt='$homepage'/></a></td>";
         } elseif($homepage_guess && ($homepage = guessHomepage($email, $email2)) != "") {
-            echo "<td class='center'><a href='http://$homepage'><img src='${url_images}icons/house.png' title='".ucfmsg("GUESSED_HOMEPAGE")." ($homepage)' alt='".ucfmsg("GUESSED_HOMEPAGE")." ($homepage)'/></a></td>";
+            echo "<td class='center'><a href='http://$homepage'><img src='{$url_images}icons/house.png' title='".ucfmsg("GUESSED_HOMEPAGE")." ($homepage)' alt='".ucfmsg("GUESSED_HOMEPAGE")." ($homepage)'/></a></td>";
         } else {
         	echo "<td/>";
         }		    
   		  break;
   	  default: // firstname, lastname, home, mobile, work, fax, phone2
-         echo "<td>${$row}</td>";
+         echo "<td>{${$row}}</td>";
     }
 }
 
@@ -299,7 +299,7 @@ function addRow($row) {
 	echo "<br/></form>";
 
 	// Show group footer
-        if($group_name != "" and $group_myrow['group_footer'] != "")
+        if($group_name != "" and !empty($group_myrow['group_footer']))
         {  
             echo "<hr />";
             echo $group_myrow['group_footer'];

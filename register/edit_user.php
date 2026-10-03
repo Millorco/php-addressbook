@@ -22,7 +22,7 @@ include"auth_check_header.php";
       </font></font></strong>
     </div>
       <div style="text-align:left; width:100%; margin-top:10px;">
-        <p align="center"><? include"include_menu.php"; ?></p>
+        <p align="center"><?php include"include_menu.php"; ?></p>
         <form action="edit_user_save.php" method="post" name="form" id="form">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
@@ -68,52 +68,52 @@ echo"</table></font>";
                     <tr>
                       <td width="295" bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">ID</font></td>
                       <td width='342' bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                       <? echo htmlspecialchars($id); ?><input type="hidden" width="50" name="id" value = '<? echo htmlspecialchars($id); ?>' /> </font></td>
+                       <?php echo htmlspecialchars($id); ?><input type="hidden" width="50" name="id" value = '<?php echo htmlspecialchars($id); ?>' /> </font></td>
                     </tr>
                     <tr>
                       <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Username</font></td>
                       <td width='342'><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                      <? echo htmlspecialchars($username); ?></font></td>
+                      <?php echo htmlspecialchars($username); ?></font></td>
                     </tr>
                     <tr>
                       <td bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Password</font></td>
                       <td width='342' bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                       <? echo htmlspecialchars($password); ?></font></td>
+                       <?php echo htmlspecialchars($password); ?></font></td>
                     </tr>
                     <tr>
                       <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Lastname</font></td>
                       <td width='342'><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                        <input type="text" width="50" name="lastname" value = '<? echo htmlspecialchars($lastname); ?>' />
+                        <input type="text" width="50" name="lastname" value = '<?php echo htmlspecialchars($lastname); ?>' />
                       </font></td>
                     </tr>
                     <tr>
                       <td bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Firstname</font></td>
                       <td width='342' bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                        <input type="text" width="50" name="firstname" value = '<? echo htmlspecialchars($firstname); ?>' />
+                        <input type="text" width="50" name="firstname" value = '<?php echo htmlspecialchars($firstname); ?>' />
                       </font></td>
                     </tr>
                     <tr>
                       <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Phone</font></td>
                       <td width='342'><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                        <input type="text" width="50" name="phone" value = '<? echo htmlspecialchars($phone); ?>' />
+                        <input type="text" width="50" name="phone" value = '<?php echo htmlspecialchars($phone); ?>' />
                       </font></td>
                     </tr>
                     <tr>
                       <td bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Email </font></td>
                       <td width='342' bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                        <input type="text" width="50" name="email" value = '<? echo htmlspecialchars($email); ?>' />
+                        <input type="text" width="50" name="email" value = '<?php echo htmlspecialchars($email); ?>' />
                       </font></td>
                     </tr>
 					   <tr>
                       <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Permissions</font></td>
                       <td width='342'><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                        <input type="text" width="50" name="permissions" value = '<? echo htmlspecialchars($permissions); ?>' />
+                        <input type="text" width="50" name="permissions" value = '<?php echo htmlspecialchars($permissions); ?>' />
                       </font></td>
                     </tr>
 					 <tr>
                       <td bgcolor="#ebebeb"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Notes</font></td>
                       <td width='342' bgcolor="#ebebeb"><p><b>
-                        <textarea name="notes" cols="45" rows="8"><? echo htmlspecialchars($notes); ?></textarea>
+                        <textarea name="notes" cols="45" rows="8"><?php echo htmlspecialchars($notes); ?></textarea>
                        </b></p>                       </td>
                     </tr>
                   </table>
@@ -121,7 +121,7 @@ echo"</table></font>";
                     <input type="submit" name="Submit" value="Save Changes" />
                   </p>
                   <p>&nbsp;</p>
-                  <p><a href="delete_user_confirm.php?id=<? echo htmlspecialchars($id); ?>"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Delete User </font></a></p>
+                  <p><a href="delete_user_confirm.php?id=<?php echo htmlspecialchars($id); ?>"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Delete User </font></a></p>
               </div></td>
             </tr>
           </table>

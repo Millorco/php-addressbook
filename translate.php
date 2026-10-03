@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="Description" content="PHP-Addressbook" />
 	<meta name="Keywords" content="" />
-	<link rel="icon" type="image/png" href="<?php echo $url_images; ?>icons/font.png" />
+	<link rel="icon" type="image/png" href="icons/font.png" />
 	<title>Translate</title>
 </head>
 <body>
@@ -70,7 +70,7 @@ function utf8_to_utf16le($line) {
       
     } else { // Fallback to ISO-8859-1
   	  $res = '"'.implode('"'.";".'"', $line).'"'."\r\n";
-      return utf8_decode($res);
+      return mb_convert_encoding($res, "ISO-8859-1", "UTF-8");
     }	
 
 }

@@ -222,7 +222,7 @@ class OAuth2Client
 		$this->http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$this->http_info = array_merge($this->http_info, curl_getinfo($ch));
 
-		curl_close ($ch);
+		if (PHP_VERSION_ID < 80000) { curl_close($ch); }
 
 		return $response; 
 	}

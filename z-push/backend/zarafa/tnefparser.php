@@ -491,7 +491,7 @@ class TNEFParser {
                     //reported by dw2412
                     //cast to integer as it evaluates to 1 or 0 because
                     //a non empty string evaluates to true :(
-                    $mapiprops[$propTag] = (integer) bin2hex($mapiprops[$propTag]{0});
+                    $mapiprops[$propTag] = (int) bin2hex($mapiprops[$propTag][0]);
                     ZLog::Write(LOGLEVEL_DEBUG, "TNEF: propvalue:".$mapiprops[$propTag]);
                     break;
 

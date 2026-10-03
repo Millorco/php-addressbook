@@ -119,7 +119,7 @@ class SimpleRealm {
      *    @access private
      */
     protected function isIn($part, $whole) {
-        return strpos($whole, $part) === 0;
+        return strpos((string) $whole, (string) $part) === 0;
     }
 }
 

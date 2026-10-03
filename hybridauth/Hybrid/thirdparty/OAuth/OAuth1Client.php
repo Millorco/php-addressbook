@@ -207,7 +207,7 @@ class OAuth1Client{
 		$this->http_code = curl_getinfo($ci, CURLINFO_HTTP_CODE);
 		$this->http_info = array_merge($this->http_info, curl_getinfo($ci));
 
-		curl_close ($ci);
+		if (PHP_VERSION_ID < 80000) { curl_close($ci); }
 
 		return $response; 
 	}

@@ -51,7 +51,7 @@ class SyncRRPicture extends SyncObject {
     public $status;
     public $data;
 
-    public function SyncRRPicture() {
+    public function __construct() {
         $mapping = array (
             SYNC_RESOLVERECIPIENTS_MAXSIZE                  => array (  self::STREAMER_VAR      => "maxsize"),
             SYNC_RESOLVERECIPIENTS_MAXPICTURES              => array (  self::STREAMER_VAR      => "maxpictures"),
@@ -59,7 +59,7 @@ class SyncRRPicture extends SyncObject {
             SYNC_RESOLVERECIPIENTS_DATA                     => array (  self::STREAMER_VAR      => "data"),
         );
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 
 }

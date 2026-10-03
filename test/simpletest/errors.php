@@ -127,11 +127,13 @@ class SimpleErrorQueue {
      *    @access public
      */
     function tally() {
-        while (list($severity, $message, $file, $line) = $this->extract()) {
+        while ($error = $this->extract()) {
+            list($severity, $message, $file, $line) = $error;
             $severity = $this->getSeverityAsString($severity);
             $this->test->error($severity, $message, $file, $line);
         }
-        while (list($expected, $message) = $this->extractExpectation()) {
+        while ($expectation = $this->extractExpectation()) {
+            list($expected, $message) = $expectation;
             $this->test->assert($expected, false, "%s -> Expected error not caught");
         }
     }
@@ -195,7 +197,7 @@ class SimpleErrorQueue {
      */
     static function getSeverityAsString($severity) {
         static $map = array(
-                E_STRICT => 'E_STRICT',
+                2048 => 'E_STRICT', // constant deprecated since PHP 8.4
                 E_ERROR => 'E_ERROR',
                 E_WARNING => 'E_WARNING',
                 E_PARSE => 'E_PARSE',
@@ -213,7 +215,10 @@ class SimpleErrorQueue {
         if (defined('E_DEPRECATED')) {
             $map[E_DEPRECATED] = 'E_DEPRECATED';
         }
-        return $map[$severity];
+        if (defined('E_USER_DEPRECATED')) {
+            $map[E_USER_DEPRECATED] = 'E_USER_DEPRECATED';
+        }
+        return isset($map[$severity]) ? $map[$severity] : 'E_UNKNOWN';
     }
 }
 

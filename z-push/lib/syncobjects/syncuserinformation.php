@@ -53,7 +53,7 @@ class SyncUserInformation extends SyncObject {
     public $emailaddresses;
     public $Status;
 
-    public function SyncUserInformation() {
+    public function __construct() {
         $mapping = array (
             SYNC_SETTINGS_ACCOUNTID                 => array (  self::STREAMER_VAR      => "accountid"),
             SYNC_SETTINGS_ACCOUNTNAME               => array (  self::STREAMER_VAR      => "accountname"),
@@ -72,7 +72,7 @@ class SyncUserInformation extends SyncObject {
             $mapping[SYNC_SETTINGS_SENDDISABLED]    = array (   self::STREAMER_VAR       => "senddisabled");
         }
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 }
 

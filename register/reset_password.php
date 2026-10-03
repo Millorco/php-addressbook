@@ -1,4 +1,4 @@
-<?
+<?php
 
 include"master_inc.php";
 
@@ -56,7 +56,7 @@ die( "<font size='2' face='Verdana, Arial, Helvetica, sans-serif'>Trouble saving
       <TR>
         <TD width="171"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Username</font></TD>
         <TD width="204"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-          <? 
+          <?php 
 		  
 		  $query = "SELECT * FROM users WHERE email='$email' AND password='$encrypted_temp_pw'";
 
@@ -78,8 +78,8 @@ $password= $row["password"];
 		  }
 		  
 		   ?>
-          <input type = "hidden" value="<? echo $email; ?>" name="email" width="50" />
-          <input type = "hidden" value="<? echo $username; ?>" name="username" width="50" />
+          <input type = "hidden" value="<?php echo $email; ?>" name="email" width="50" />
+          <input type = "hidden" value="<?php echo $username; ?>" name="username" width="50" />
 </font></TD>
       </TR>
     </TBODY>
@@ -115,7 +115,7 @@ $password= $row["password"];
   </font></p>
   </form>
   <p>
-    <?
+    <?php
 
 ?>
   </p>

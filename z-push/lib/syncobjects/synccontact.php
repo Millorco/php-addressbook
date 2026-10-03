@@ -113,7 +113,7 @@ class SyncContact extends SyncObject {
     public $nickname;
     public $mms;
 
-    function SyncContact() {
+    function __construct() {
         $mapping = array (
                     SYNC_POOMCONTACTS_ANNIVERSARY                       => array (  self::STREAMER_VAR      => "anniversary",
                                                                                     self::STREAMER_TYPE     => self::STREAMER_TYPE_DATE_DASHES  ),
@@ -201,7 +201,7 @@ class SyncContact extends SyncObject {
             unset($mapping[SYNC_POOMCONTACTS_BODY], $mapping[SYNC_POOMCONTACTS_BODYTRUNCATED]);
         }
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 }
 

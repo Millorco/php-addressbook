@@ -50,7 +50,7 @@ class SyncAttendee extends SyncObject {
     public $email;
     public $name;
 
-    function SyncAttendee() {
+    function __construct() {
         $mapping = array(
                     SYNC_POOMCAL_EMAIL                                  => array (  self::STREAMER_VAR      => "email",
                                                                                     self::STREAMER_CHECKS   => array(   self::STREAMER_CHECK_REQUIRED => self::STREAMER_CHECK_SETEMPTY)),
@@ -64,7 +64,7 @@ class SyncAttendee extends SyncObject {
             $mapping[SYNC_POOMCAL_ATTENDEETYPE]                         =  array (  self::STREAMER_VAR      => "attendeetype");
         }
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 }
 

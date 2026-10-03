@@ -231,6 +231,14 @@ class StateObject implements Serializable {
         return true;
     }
 
+    public function __serialize() {
+        return array('data' => $this->serialize());
+    }
+
+    public function __unserialize($data) {
+        $this->unserialize($data['data']);
+    }
+
     /**
      * Called before the StateObject is serialized
      *

@@ -87,7 +87,7 @@ class ICalParser{
             $nextline = $aical[$i+1];
 
             //if a line starts with a space or a tab it belongs to the previous line
-            while (strlen($nextline) > 0 && ($nextline{0} == " " || $nextline{0} == "\t")) {
+            while (strlen($nextline) > 0 && ($nextline[0] == " " || $nextline[0] == "\t")) {
                 $line = rtrim($line) . substr($nextline, 1);
                 $nextline = $aical[++$i + 1];
             }

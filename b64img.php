@@ -11,7 +11,7 @@ example usage:
 header("Content-Type: image/png");
 
 // get amounts and titles from session.
-$text = base64_decode($_GET['text']);
+$text = base64_decode(isset($_GET["text"]) ? $_GET["text"] : "");
 
 // calculate required width and height of image
 $pic_width = strlen($text)*6;
@@ -45,6 +45,5 @@ ImageString($pic,2,0,0,$text,$user);
 // output image
 ImagePNG($pic);
 
-// remove image from memory
-ImageDestroy($pic);
+// (the image is freed automatically; ImageDestroy() is deprecated since PHP 8.5)
 ?>

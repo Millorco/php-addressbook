@@ -9,12 +9,34 @@ class MysqliDatabase implements DatabaseInterface {
     private $link;
 
     public function connect($server, $username, $password, $new_link = false, $client_flags = 0) {
+        // PHP 8.1+ throws mysqli_sql_exception by default. The application
+        // checks return values and errno() instead, so keep the legacy mode.
+        mysqli_report(MYSQLI_REPORT_OFF);
+
+        // Legacy "host:port" / "host:/path/to/socket" notation of ext/mysql
+        $host   = $server;
+        $port   = null;
+        $socket = null;
+        if (is_string($server) && preg_match('/^([^:]*):(.+)$/', $server, $parts)) {
+            $host = $parts[1];
+            if (ctype_digit($parts[2])) {
+                $port = (int) $parts[2];
+            } else {
+                $socket = $parts[2];
+            }
+        }
+
         try {
-            $this->link = mysqli_connect($server, $username, $password);
+            $this->link = @mysqli_connect($host, $username, $password, null, $port, $socket);
         } catch (Exception $e) {
             $this->link = false;
         }
         return $this->link;
+    }
+
+    public function setCharset($charset) {
+        if (!($this->link instanceof mysqli)) return false;
+        return mysqli_set_charset($this->link, $charset);
     }
 
     public function selectDb($database_name) {
@@ -48,12 +70,12 @@ class MysqliDatabase implements DatabaseInterface {
     }
 
     public function error() {
-        if (!($this->link instanceof mysqli)) return "";
+        if (!($this->link instanceof mysqli)) return (string) mysqli_connect_error();
         return mysqli_error($this->link);
     }
 
     public function errno() {
-        if (!($this->link instanceof mysqli)) return 0;
+        if (!($this->link instanceof mysqli)) return mysqli_connect_errno();
         return mysqli_errno($this->link);
     }
 

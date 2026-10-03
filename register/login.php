@@ -25,14 +25,14 @@
               <div style=" float:left; text-align:right; width:100px; border:1px; padding-right:10px;"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>Username</strong></font></div>
               <div style="float:left; text-align:left; border: 1px; width:140px; ">
                 <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                <input type="text" name="username" value = '<? //echo $username; ?>' />
+                <input type="text" name="username" value = '<?php //echo $username; ?>' />
               </font></div>
             </div>
           <div style="text-align:left; width:300px; height:20px; margin-top:10px;">
               <div style=" float:left; text-align:right; width:100px; border:1px; padding-right:10px;"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>Password</strong></font></div>
             <div style="float:left; text-align:left; border: 1px; width:140px; ">
                 <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
-                <input type="password" name="password" value = '<? //echo $password; ?>' />
+                <input type="password" name="password" value = '<?php //echo $password; ?>' />
               </font></div>
             <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><br />
             </strong></font></div>

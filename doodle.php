@@ -5,6 +5,12 @@
   ?><title>Test</title><?php
   include ("include/header.inc.php");
 
+  if(!$use_doodle) {
+    echo "<br /><div class='msgbox'>Doodle is not configured.</div>";
+    include ("include/footer.inc.php");
+    exit;
+  }
+
 
 function encode_rfc3986($input) {
  	     

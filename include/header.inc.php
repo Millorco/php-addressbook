@@ -27,9 +27,10 @@
 
 <?php 
 	if($group_name != "") {  
-		$sql="SELECT * FROM $table_groups WHERE group_name = '$group_name'";
-		$result = mysql_query($sql);
-		$group_myrow = mysql_fetch_array($result);
-		echo $group_myrow['group_header'];
+		$result = $db_access->execute("SELECT * FROM $table_groups WHERE group_name = ?", [$group_name]);
+		$group_myrow = $db_access->fetchArray($result);
+		if($group_myrow) {
+			echo $group_myrow['group_header'];
+		}
 	}
 ?>

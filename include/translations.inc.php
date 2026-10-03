@@ -57,13 +57,15 @@ function ucfmsg($value) {
 // Try the best to convert UTF-8 to latin1.
 //
 function utf8_to_latin1($text) {
+
+  $text = (string) $text; // NULL columns: PHP 8.1+ rejects null here
 	
   if(function_exists('iconv')) {
        setlocale(LC_CTYPE, 'cs_CZ');
        return iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text);
      
   } else {
-  	  return utf8_decode($text);
+  	  return mb_convert_encoding($text, "ISO-8859-1", "UTF-8");
 	  }
 }
 

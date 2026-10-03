@@ -60,7 +60,7 @@ class SyncMailFlags extends SyncObject {
     public $subordinaldate;
 
 
-    function SyncMailFlags() {
+    function __construct() {
         $mapping = array(
                     SYNC_POOMTASKS_SUBJECT                              => array (  self::STREAMER_VAR      => "subject"),
                     SYNC_POOMMAIL_FLAGSTATUS                            => array (  self::STREAMER_VAR      => "flagstatus"),
@@ -93,7 +93,7 @@ class SyncMailFlags extends SyncObject {
                     SYNC_POOMTASKS_SUBORDINALDATE                       => array (  self::STREAMER_VAR      => "subordinaldate"),
         );
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 }
 ?>

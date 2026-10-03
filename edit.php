@@ -181,6 +181,11 @@ else if($id)
   {
 $addresses = Addresses::withID($id);
 $addr_obj = $addresses->nextAddress();
+if(!$addr_obj) {
+  echo "<br /><div class='msgbox'>".ucfmsg('INVALID')." ID.<br /><i>return to <a href='index$page_ext'>home page</a></i></div>";
+  include("include/footer.inc.php");
+  exit;
+}
 $myrow = $addr_obj->getData();
 ?>
 

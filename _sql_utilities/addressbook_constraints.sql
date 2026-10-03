@@ -1,10 +1,10 @@
 --
 -- Convert all table to transactional.
 --
-alter table addressbook       type=innodb;
-alter table address_in_groups type=innodb;
-alter table group_list        type=innodb;
-alter table month_lookup      type=innodb;
+alter table addressbook       ENGINE=InnoDB;
+alter table address_in_groups ENGINE=InnoDB;
+alter table group_list        ENGINE=InnoDB;
+alter table month_lookup      ENGINE=InnoDB;
 
 --
 -- Add foreign keys

@@ -59,7 +59,7 @@ abstract class InterProcessData {
      *
      * @access public
      */
-    public function InterProcessData() {
+    public function __construct() {
         if (!isset($this->type) || !isset($this->allocate))
             throw new FatalNotImplementedException(sprintf("Class InterProcessData can not be initialized. Subclass %s did not initialize type and allocable memory.", get_class($this)));
 

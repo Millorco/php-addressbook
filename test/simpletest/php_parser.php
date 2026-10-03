@@ -689,6 +689,8 @@ class SimpleHtmlSaxParser {
  *    @subpackage WebTester
  */
 class SimplePhpPageBuilder {
+    private $label;
+    private $last_widget;
     private $tags;
     private $page;
     private $private_content_tag;

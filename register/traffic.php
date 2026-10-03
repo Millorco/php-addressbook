@@ -1,4 +1,4 @@
-<? include"auth_check_header.php";  
+<?php include"auth_check_header.php";  
 
 
 function nicetrim ($s) {
@@ -175,7 +175,7 @@ $a = $s + ($limit) ;
     </div></td>
   </tr>
 </table>
-<?
+<?php
 //View Tracking Code for reference
 
 		   

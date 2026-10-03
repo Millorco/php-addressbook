@@ -7,7 +7,7 @@
 *
 * Created   :   16.07.2010
 * Updated   :   11.04.2016
-* chatelao/ät/users.sourceforge.net
+* chatelao/ï¿½t/users.sourceforge.net
 *
 * Consult LICENSE file for details
 ************************************************/
@@ -137,8 +137,7 @@ class PhpAddr {
          }
      }
      mysql_select_db("$dbname", $db);
-     mysql_query('set character set utf8;');
-     mysql_query("SET NAMES `utf8`");
+     mysql_set_charset('utf8mb4', $db);
      
      return $db;
 

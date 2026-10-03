@@ -63,7 +63,7 @@ class SimpleUrl {
                 $this->host = false;
             } else {
                 $this->host = $host_parts[1];
-                $this->port = (integer)$host_parts[2];
+                $this->port = (int)$host_parts[2];
             }
         }
         $this->path = $this->chompPath($url);
@@ -82,7 +82,7 @@ class SimpleUrl {
     protected function chompCoordinates(&$url) {
         if (preg_match('/(.*)\?(\d+),(\d+)$/', $url, $matches)) {
             $url = $matches[1];
-            return array((integer)$matches[2], (integer)$matches[3]);
+            return array((int)$matches[2], (int)$matches[3]);
         }
         return array(false, false);
     }
@@ -323,8 +323,8 @@ class SimpleUrl {
             $this->x = $this->y = false;
             return;
         }
-        $this->x = (integer)$x;
-        $this->y = (integer)$y;
+        $this->x = (int)$x;
+        $this->y = (int)$y;
     }
 
     /**

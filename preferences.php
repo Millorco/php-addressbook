@@ -6,7 +6,7 @@
 <?php include ("include/header.inc.php"); ?>
 
 	<h1><?php echo ucfmsg('PREFERENCES'); ?></h1> 
-		<form method="post" action="<?php echo urldecode($_GET['from']); ?>">
+		<form method="post" action="<?php echo htmlspecialchars(isset($_GET['from']) ? $_GET['from'] : ''); ?>">
 				<!--  	
 					<label><?php echo ucfmsg("LANGUAGE") ?>:</label>
 					<select name="language" onchange="">
@@ -27,7 +27,7 @@
 				<input type="submit" name="update" value="<?php echo ucfmsg("UPDATE") ?>" />
 		</form>
 <br>
-		<form method="post" name="sso_form" action="<?php echo urldecode($_GET['from']); ?>">
+		<form method="post" name="sso_form" action="<?php echo htmlspecialchars(isset($_GET['from']) ? $_GET['from'] : ''); ?>">
   	         <input name="user" type="hidden"/>
 				<label><?php echo ucfmsg("SIGN_IN_WITH") ?>:</label>
   	         <a href="javascript:sso_form.user.value='Facebook';sso_form.submit();"><img src="icons/facebook.png"></a>

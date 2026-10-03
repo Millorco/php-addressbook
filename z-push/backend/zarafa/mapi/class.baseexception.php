@@ -94,7 +94,7 @@ class BaseException extends Exception
      * @param  string $displayMessage
      * @return void
      */
-    public function __construct($errorMessage, $code = 0, Exception $previous = null, $displayMessage = null) {
+    public function __construct($errorMessage, $code = 0, $previous = null, $displayMessage = null) {
         // assign display message
         $this->displayMessage = $displayMessage;
 

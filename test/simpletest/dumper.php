@@ -116,7 +116,7 @@ class SimpleDumper {
      *    @access public
      */
     function clipString($value, $size, $position = 0) {
-        $length = strlen($value);
+        $length = strlen((string) $value);
         if ($length <= $size) {
             return $value;
         }
@@ -382,7 +382,7 @@ class SimpleDumper {
         $position = 0;
         $step = strlen($first);
         while ($step > 1) {
-            $step = (integer)(($step + 1) / 2);
+            $step = (int)(($step + 1) / 2);
             if (strncmp($first, $second, $position + $step) == 0) {
                 $position += $step;
             }

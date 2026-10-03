@@ -135,7 +135,7 @@ class ZPushTop {
      *
      * @access public
      */
-    public function ZPushTop() {
+    public function __construct() {
         $this->starttime = time();
         $this->currenttime = time();
         $this->action = "";
@@ -323,7 +323,7 @@ class ZPushTop {
     private function scrOverview() {
         $linesAvail = $this->scrSize['height'] - 8;
         $lc = 1;
-        $this->scrPrintAt($lc,0, "\033[1mZ-Push top live statistics\033[0m\t\t\t\t\t". @strftime("%d/%m/%Y %T")."\n"); $lc++;
+        $this->scrPrintAt($lc,0, "\033[1mZ-Push top live statistics\033[0m\t\t\t\t\t". date("d/m/Y H:i:s")."\n"); $lc++;
 
         $this->scrPrintAt($lc,0, sprintf("Open connections: %d\t\t\t\tUsers:\t %d\tZ-Push:   %s ",count($this->activeConn),count($this->activeUsers), $this->getVersion())); $lc++;
         $this->scrPrintAt($lc,0, sprintf("Push connections: %d\t\t\t\tDevices: %d\tPHP-MAPI: %s", $this->pushConn, count($this->activeDevices),phpversion("mapi"))); $lc++;
@@ -466,7 +466,7 @@ class ZPushTop {
      * @return
      */
     private function readLineProcess() {
-        $ans = explode("^^", `bash -c "read -n 1 -t 1 ANS ; echo \\\$?^^\\\$ANS;"`);
+        $ans = explode("^^", shell_exec('bash -c "read -n 1 -t 1 ANS ; echo \$?^^\$ANS;"'));
 
         if ($ans[0] < 128) {
             if (isset($ans[1]) && bin2hex(trim($ans[1])) == "7f") {

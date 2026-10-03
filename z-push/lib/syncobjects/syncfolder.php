@@ -53,7 +53,7 @@ class SyncFolder extends SyncObject {
     public $type;
     public $Store;
 
-    function SyncFolder() {
+    function __construct() {
         $mapping = array (
                     SYNC_FOLDERHIERARCHY_SERVERENTRYID                  => array (  self::STREAMER_VAR      => "serverid",
                                                                                     self::STREAMER_CHECKS   => array(   self::STREAMER_CHECK_REQUIRED   => false)),
@@ -73,7 +73,7 @@ class SyncFolder extends SyncObject {
                                                                                     self::STREAMER_TYPE     => self::STREAMER_TYPE_IGNORE),
                 );
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 }
 ?>

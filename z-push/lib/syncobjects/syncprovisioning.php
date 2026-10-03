@@ -94,7 +94,7 @@ class SyncProvisioning extends SyncObject {
     public $unapprovedinromapplist;
     public $approvedapplist;
 
-    function SyncProvisioning() {
+    function __construct() {
         $mapping = array (
                     SYNC_PROVISION_DEVPWENABLED                         => array (  self::STREAMER_VAR      => "devpwenabled",
                                                                                     self::STREAMER_CHECKS   => array(   self::STREAMER_CHECK_ONEVALUEOF => array(0,1) )),
@@ -232,7 +232,7 @@ class SyncProvisioning extends SyncObject {
             );
         }
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 
     public function Load($policies = array()) {

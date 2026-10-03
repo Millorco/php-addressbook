@@ -169,7 +169,7 @@ class TrueExpectation extends SimpleExpectation {
      *    @access public
      */
     function test($compare) {
-        return (boolean)$compare;
+        return (bool)$compare;
     }
 
     /**
@@ -199,7 +199,7 @@ class FalseExpectation extends SimpleExpectation {
      *    @access public
      */
     function test($compare) {
-        return ! (boolean)$compare;
+        return ! (bool)$compare;
     }
 
     /**
@@ -644,7 +644,7 @@ class PatternExpectation extends SimpleExpectation {
      *    @access public
      */
     function test($compare) {
-        return (boolean)preg_match($this->getPattern(), $compare);
+        return (bool)preg_match($this->getPattern(), $compare);
     }
 
     /**
@@ -876,7 +876,7 @@ class MethodExistsExpectation extends SimpleExpectation {
      *    @return boolean               True if correct.
      */
     function test($compare) {
-        return (boolean)(is_object($compare) && method_exists($compare, $this->method));
+        return (bool)(is_object($compare) && method_exists($compare, $this->method));
     }
 
     /**

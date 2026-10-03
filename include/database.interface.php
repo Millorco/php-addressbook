@@ -15,6 +15,11 @@ interface DatabaseInterface {
     public function selectDb($database_name);
 
     /**
+     * Set the character set of the connection (e.g. "utf8mb4")
+     */
+    public function setCharset($charset);
+
+    /**
      * Execute a query
      */
     public function query($query);

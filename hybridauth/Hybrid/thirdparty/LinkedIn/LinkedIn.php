@@ -173,7 +173,7 @@ class LinkedIn {
    * Explicitly clears LinkedIn object from memory upon destruction.
 	 */
   public function __destruct() {
-    unset($this);
+    // unset($this) is not allowed since PHP 7.1; nothing to free explicitly.
 	}
 	
 	/**
@@ -708,7 +708,7 @@ class LinkedIn {
       //TODO - add check for NO response (http_code = 0) from cURL
       
       // close cURL connection
-      curl_close($handle);
+      if (PHP_VERSION_ID < 80000) { curl_close($handle); }
       
       // no exceptions thrown, return the data
       return $return_data;
@@ -2633,7 +2633,7 @@ class LinkedIn {
 	    // not valid xml data
 	    $return_data = FALSE;
 	  }
-	  xml_parser_free($parser);
+	  if (PHP_VERSION_ID < 80000) { xml_parser_free($parser); }
     return $return_data;
   }
 }

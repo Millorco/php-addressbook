@@ -65,7 +65,7 @@ class SyncTask extends SyncObject {
     public $rtf;
     public $categories;
 
-    function SyncTask() {
+    function __construct() {
         $mapping = array (
                     SYNC_POOMTASKS_BODY                                 => array (  self::STREAMER_VAR      => "body"),
                     SYNC_POOMTASKS_COMPLETE                             => array (  self::STREAMER_VAR      => "complete",
@@ -130,7 +130,7 @@ class SyncTask extends SyncObject {
             unset($mapping[SYNC_POOMTASKS_BODY]);
         }
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 
     /**

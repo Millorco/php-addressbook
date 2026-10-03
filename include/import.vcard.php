@@ -85,7 +85,7 @@ class ImportVCards  {
       if(   isset($addr_line["ENCODING"]) 
          && count($addr_line["ENCODING"]) == 1
          && $addr_line["ENCODING"][0] == "QUOTED-PRINTABLE") {
-        $val = utf8_encode(quoted_printable_decode($val));
+        $val = mb_convert_encoding(quoted_printable_decode($val), "UTF-8", "ISO-8859-1");
       }
       $val = str_replace("=0D", "\r", $val);
       $val = str_replace("=0A", "\n", $val);

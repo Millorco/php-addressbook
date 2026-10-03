@@ -71,7 +71,7 @@ class WBXMLDecoder extends WBXMLDefs {
      *
      * @access public
      */
-    public function WBXMLDecoder($input) {
+    public function __construct($input) {
         // make sure WBXML_DEBUG is defined. It should be at this point
         if (!defined('WBXML_DEBUG')) define('WBXML_DEBUG', false);
 
@@ -371,12 +371,12 @@ class WBXMLDecoder extends WBXMLDefs {
                 case WBXML_EXT_I_2:
                     $this->getTermStr();
                     // Ignore extensions
-                    continue;
+                    break;
 
                 case WBXML_PI:
                     // Ignore PI
                     $this->getAttributes();
-                    continue;
+                    break;
 
                 case WBXML_LITERAL_C:
                     $element[EN_TYPE] = EN_TYPE_STARTTAG;
@@ -389,7 +389,7 @@ class WBXMLDecoder extends WBXMLDefs {
                 case WBXML_EXT_T_2:
                     $this->getMBUInt();
                     // Ingore extensions;
-                    continue;
+                    break;
 
                 case WBXML_STR_T:
                     $element[EN_TYPE] = EN_TYPE_CONTENT;
@@ -405,7 +405,7 @@ class WBXMLDecoder extends WBXMLDefs {
                 case WBXML_EXT_0:
                 case WBXML_EXT_1:
                 case WBXML_EXT_2:
-                    continue;
+                    break;
 
                 case WBXML_OPAQUE:
                     $length = $this->getMBUInt();
@@ -478,7 +478,7 @@ class WBXMLDecoder extends WBXMLDefs {
                 case WBXML_EXT_I_1:
                 case WBXML_EXT_I_2:
                     $this->getTermStr();
-                    continue;
+                    break;
 
                 case WBXML_PI:
                 case WBXML_LITERAL_C:
@@ -489,7 +489,7 @@ class WBXMLDecoder extends WBXMLDefs {
                 case WBXML_EXT_T_1:
                 case WBXML_EXT_T_2:
                     $this->getMBUInt();
-                    continue;
+                    break;
 
                 case WBXML_STR_T:
                     $attr .= $this->getStringTableEntry($this->getMBUInt());
@@ -501,7 +501,7 @@ class WBXMLDecoder extends WBXMLDefs {
                 case WBXML_EXT_0:
                 case WBXML_EXT_1:
                 case WBXML_EXT_2:
-                    continue;
+                    break;
 
                 case WBXML_OPAQUE:
                     $length = $this->getMBUInt();

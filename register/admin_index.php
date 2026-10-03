@@ -23,7 +23,7 @@ include"auth_check_header.php";
     </div>
       <div style="text-align:left; width:100%; margin-top:10px;">
         <p align="center">
-          <? include"include_menu.php"; ?>
+          <?php include"include_menu.php"; ?>
           <font size="2" face="Verdana, Arial, Helvetica, sans-serif">|</font> <strong><font face="Verdana, Arial, Helvetica, sans-serif"><a href="traffic.php"><font size="2">Traffic Report</font></a></font></strong></p>
         <form action="admin_index.php" method="post" name="form" id="form">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">

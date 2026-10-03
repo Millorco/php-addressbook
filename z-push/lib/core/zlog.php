@@ -270,7 +270,7 @@ function debugLog($message) {
 }
 
 // TODO review error handler
-function zarafa_error_handler($errno, $errstr, $errfile, $errline, $errcontext) {
+function zarafa_error_handler($errno, $errstr, $errfile, $errline, $errcontext = null) {
     $bt = debug_backtrace();
     switch ($errno) {
         case 8192:      // E_DEPRECATED since PHP 5.3.0

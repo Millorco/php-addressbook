@@ -86,7 +86,7 @@ class ASDevice extends StateObject {
      * @access public
      * @return
      */
-    public function ASDevice($devid, $devicetype, $getuser, $useragent) {
+    public function __construct($devid, $devicetype, $getuser, $useragent) {
         $this->deviceid = $devid;
         $this->devicetype = $devicetype;
         list ($this->deviceuser, $this->domain) =  Utils::SplitDomainUser($getuser);
@@ -123,7 +123,7 @@ class ASDevice extends StateObject {
 
                 // another user has a required action on this device
                 if (isset($asuserdata->wipeStatus) && $asuserdata->wipeStatus > SYNC_PROVISION_RWSTATUS_OK) {
-                    ZLog::Write(LOGLEVEL_INFO, sprintf("User '%s' has requested a remote wipe for this device on '%s'", $asuserdata->wipeRequestBy, strftime("%Y-%m-%d %H:%M", $asuserdata->wipeRequstOn)));
+                    ZLog::Write(LOGLEVEL_INFO, sprintf("User '%s' has requested a remote wipe for this device on '%s'", $asuserdata->wipeRequestBy, date("Y-m-d H:i", $asuserdata->wipeRequstOn)));
 
                     // reset status to PENDING if wipe was executed before
                     $this->wipeStatus =  ($asuserdata->wipeStatus & SYNC_PROVISION_RWSTATUS_WIPED)?SYNC_PROVISION_RWSTATUS_PENDING:$asuserdata->wipeStatus;
@@ -300,7 +300,7 @@ class ASDevice extends StateObject {
         if ($this->wipeStatus > SYNC_PROVISION_RWSTATUS_PENDING)
             ZLog::Write(LOGLEVEL_INFO, sprintf("ASDevice id '%s' was %s remote wiped on %s. Action requested by user '%s' on %s",
                                         $this->deviceid, ($this->wipeStatus == SYNC_PROVISION_RWSTATUS_REQUESTED ? "requested to be": "sucessfully"),
-                                        strftime("%Y-%m-%d %H:%M", $this->wipeActionOn), $this->wipeRequestedBy, strftime("%Y-%m-%d %H:%M", $this->wipeRequestedOn)));
+                                        date("Y-m-d H:i", $this->wipeActionOn), $this->wipeRequestedBy, date("Y-m-d H:i", $this->wipeRequestedOn)));
     }
 
    /**

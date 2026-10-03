@@ -3,6 +3,8 @@
 --
 -- * You may add table prefixes, if the "$table_prefix"
 --   parameter is set in "config.php".
+-- * Uses "utf8mb4" (available since MySQL 5.5.3); tested with MySQL 26.7.
+--   Existing installations: see "_sql_upgrades/addressbook_upgrade_utf8mb4.sql".
 --
 -- $LastChangedDate$
 -- $Rev$
@@ -10,15 +12,15 @@
 --
 
 CREATE TABLE addressbook (
-  pid int(9) unsigned NOT NULL auto_increment,
-  domain_id int(9) unsigned NOT NULL default 0,
-  id int(9) unsigned NOT NULL,
-  firstname varchar(255) NOT NULL,
-  middlename varchar(255) NOT NULL,
-  lastname varchar(255) NOT NULL,
-  nickname varchar(255) NOT NULL,
-  company varchar(255) NOT NULL,
-  title varchar(255) NOT NULL,
+  pid int unsigned NOT NULL auto_increment,
+  domain_id int unsigned NOT NULL default 0,
+  id int unsigned NOT NULL,
+  firstname varchar(255) NOT NULL default '',
+  middlename varchar(255) NOT NULL default '',
+  lastname varchar(255) NOT NULL default '',
+  nickname varchar(255) NOT NULL default '',
+  company varchar(255) NOT NULL default '',
+  title varchar(255) NOT NULL default '',
   address text NOT NULL,
   addr_long text,
   addr_lat text,
@@ -30,16 +32,16 @@ CREATE TABLE addressbook (
   email text NOT NULL,
   email2 text NOT NULL,
   email3 text NOT NULL,
-  im text NOT NULL,
-  im2 text NOT NULL,
-  im3 text NOT NULL,
+  im text,
+  im2 text,
+  im3 text,
   homepage text NOT NULL,
-  bday tinyint(2) NOT NULL,
-  bmonth varchar(50) NOT NULL,
-  byear varchar(4) NOT NULL,
-  aday tinyint(2) NOT NULL,
-  amonth varchar(50) NOT NULL,
-  ayear varchar(4) NOT NULL,
+  bday tinyint NOT NULL default 0,
+  bmonth varchar(50) NOT NULL default '',
+  byear varchar(4) NOT NULL default '',
+  aday tinyint NOT NULL default 0,
+  amonth varchar(50) NOT NULL default '',
+  ayear varchar(4) NOT NULL default '',
   address2 text NOT NULL,
   phone2 text NOT NULL,
   notes text NOT NULL,
@@ -55,12 +57,12 @@ CREATE TABLE addressbook (
   PRIMARY KEY (pid),
   KEY id_deprecated_domain_id_idx (id,deprecated,domain_id),
   KEY deprecated_domain_id_idx (deprecated,domain_id)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE group_list (
-  `domain_id` int(9) unsigned NOT NULL default 0,
-  `group_id` int(9) unsigned NOT NULL auto_increment,
-  `group_parent_id` int(9) default NULL,
+  `domain_id` int unsigned NOT NULL default 0,
+  `group_id` int unsigned NOT NULL auto_increment,
+  `group_parent_id` int default NULL,
   `created` datetime default NULL,
   `modified` datetime default NULL,
   `deprecated` datetime DEFAULT NULL,
@@ -68,26 +70,26 @@ CREATE TABLE group_list (
   `group_header` mediumtext NOT NULL,
   `group_footer` mediumtext NOT NULL,
   PRIMARY KEY (group_id)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE address_in_groups (
-  `ag_id` int(9) unsigned NOT NULL auto_increment,
-  `domain_id` int(9) unsigned NOT NULL default 0,
-  `id` int(9) unsigned NOT NULL default 0,
-  `group_id` int(9) unsigned NOT NULL default 0,
+  `ag_id` int unsigned NOT NULL auto_increment,
+  `domain_id` int unsigned NOT NULL default 0,
+  `id` int unsigned NOT NULL default 0,
+  `group_id` int unsigned NOT NULL default 0,
   `created` datetime default NULL,
   `modified` datetime default NULL,
   `deprecated` datetime DEFAULT NULL,
   PRIMARY KEY (`ag_id`),
   KEY group_id_id_deprecated_idx (`group_id`,`id`, deprecated)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE month_lookup (
   `bmonth` varchar(50) NOT NULL default '',
   `bmonth_short` char(3) NOT NULL default '',
-  `bmonth_num` int(2) unsigned NOT NULL default 0,
+  `bmonth_num` int unsigned NOT NULL default 0,
   PRIMARY KEY (bmonth_num)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `month_lookup` VALUES ('', '', 0);
 INSERT INTO `month_lookup` VALUES ('January', 'Jan', 1);
@@ -104,10 +106,10 @@ INSERT INTO `month_lookup` VALUES ('November', 'Nov', 11);
 INSERT INTO `month_lookup` VALUES ('December', 'Dec', 12);
 
 CREATE TABLE users (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `domain_id` int(9) unsigned NOT NULL DEFAULT '0',
-  `username` char(128) NOT NULL,
-  `md5_pass` char(128) NOT NULL,
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `domain_id` int unsigned NOT NULL DEFAULT '0',
+  `username` char(128) NOT NULL DEFAULT '',
+  `md5_pass` char(128) NOT NULL DEFAULT '',
   `password_hint` varchar(255) NOT NULL DEFAULT '',
   `sso_facebook_uid` varchar(255) DEFAULT NULL,
   `sso_google_uid` varchar(255) DEFAULT NULL,
@@ -123,13 +125,13 @@ CREATE TABLE users (
   `state` varchar(20) NOT NULL DEFAULT '',
   `zip` varchar(20) NOT NULL DEFAULT '',
   `country` varchar(50) NOT NULL DEFAULT '',
-  `master_code` char(128) NOT NULL,
+  `master_code` char(128) NOT NULL DEFAULT '',
   `confirmation_code` char(128) DEFAULT NULL,
   `pass_reset_code` char(128) DEFAULT NULL,
   `status` char(128) NOT NULL DEFAULT 'NEW' COMMENT 'New, Ready, Blocked',
-  `trials` int(11) NOT NULL DEFAULT '0',
+  `trials` int NOT NULL DEFAULT '0',
    created datetime default NULL,
    modified datetime default NULL,
    deprecated datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

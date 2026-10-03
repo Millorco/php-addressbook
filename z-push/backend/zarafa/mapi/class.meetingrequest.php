@@ -688,7 +688,7 @@ If it is the first time this attendee has proposed a new date/time, increment th
         return $this->accept($tentative, $sendresponse, $move, $newProposedStartTime, $newProposedEndTime, $body, $userAction, $store, $calFolder, $basedate);
     }
 
-    function accept($tentative, $sendresponse, $move, $newProposedStartTime=false, $newProposedEndTime=false, $body=false, $userAction = false, $store, $calFolder, $basedate = false)
+    function accept($tentative, $sendresponse, $move, $newProposedStartTime, $newProposedEndTime, $body, $userAction, $store, $calFolder, $basedate = false)
     {
         $messageprops = mapi_getprops($this->message);
         $isDelegate = false;
@@ -1587,7 +1587,7 @@ If it is the first time this attendee has proposed a new date/time, increment th
      *@param integer $proposalEndTime proposed endtime by attendee
      *@param integer $basedate date of occurrence which attendee has responded
      */
-    function createResponse($status, $proposalStartTime=false, $proposalEndTime=false, $body=false, $store, $basedate = false, $calFolder) {
+    function createResponse($status, $proposalStartTime, $proposalEndTime, $body, $store, $basedate, $calFolder) {
         $messageprops = mapi_getprops($this->message, Array(PR_SENT_REPRESENTING_ENTRYID,
                                                             PR_SENT_REPRESENTING_EMAIL_ADDRESS,
                                                             PR_SENT_REPRESENTING_ADDRTYPE,
@@ -2438,7 +2438,7 @@ If it is the first time this attendee has proposed a new date/time, increment th
      * @param resource $store user store
      * @param boolean $isDelegate true if delegate is processing this meeting request
      */
-    function acceptException(&$recurringItem, &$occurrenceItem, $basedate, $move = false, $tentative, $userAction = false, $store, $isDelegate = false)
+    function acceptException(&$recurringItem, &$occurrenceItem, $basedate, $move, $tentative, $userAction, $store, $isDelegate = false)
     {
         $recurr = new Recurrence($store, $recurringItem);
 

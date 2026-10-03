@@ -63,7 +63,7 @@ class WBXMLEncoder extends WBXMLDefs {
     private $multipart; // the content is multipart
     private $bodyparts;
 
-    public function WBXMLEncoder($output, $multipart = false) {
+    public function __construct($output, $multipart = false) {
         // make sure WBXML_DEBUG is defined. It should be at this point
         if (!defined('WBXML_DEBUG')) define('WBXML_DEBUG', false);
 

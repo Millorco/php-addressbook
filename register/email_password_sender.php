@@ -1,4 +1,4 @@
-<?
+<?php
 
 include "master_inc.php";
 

@@ -51,7 +51,7 @@
  while ($myrow = mysql_fetch_array($result))
  {
    echo "<tr><td>".$myrow['domain_id']."</td>"
-           ."<td>".$domain[$myrow['domain_id']]['name']."</td>"
+           ."<td>".(isset($domain[$myrow['domain_id']]['name']) ? $domain[$myrow['domain_id']]['name'] : '')."</td>"
            ."<td>".$myrow['cnt']."</td></tr>";
  }
 ?>

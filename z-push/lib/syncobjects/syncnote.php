@@ -53,7 +53,7 @@ class SyncNote extends SyncObject {
     public $messageclass;
     public $subject;
 
-    function SyncNote() {
+    function __construct() {
         $mapping = array(
                     SYNC_AIRSYNCBASE_BODY                               => array (  self::STREAMER_VAR      => "asbody",
                                                                                     self::STREAMER_TYPE     => "SyncBaseBody"),
@@ -69,7 +69,7 @@ class SyncNote extends SyncObject {
                     SYNC_NOTES_SUBJECT                                  => array (  self::STREAMER_VAR      => "subject"),
                 );
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 }
 ?>

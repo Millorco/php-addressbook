@@ -216,8 +216,8 @@ if(!$db) {
     // * http://www.phpforum.de/forum/showthread.php?t=217877#PHP
     //
     // header('Content-type: text/html; charset=utf-8');
-    $db_access->query("set character set utf8;");
-    $db_access->query("SET NAMES `utf8` ");
+    // utf8mb4 is the full UTF-8 (the old "utf8" is a deprecated 3-byte alias)
+    $db_access->setCharset("utf8mb4");
 
     // Bug: #139 - Strict mode problem
     $db_access->query("SET SQL_MODE = 'STRICT_TRANS_TABLES'");
@@ -295,13 +295,14 @@ foreach($_REQUEST as $key => $value)
 // ------------------- Group query handling ------------------------
 //
 
-$select_groups = "SELECT groups.*
+// Note: "groups" is a reserved word since MySQL 8.0, so the alias is "grp".
+$select_groups = "SELECT grp.*
        	               , parent_groups.group_name  parent_name
        	               , parent_groups.group_id    parent_id
-       	            FROM $table_groups AS groups
+       	            FROM $table_groups AS grp
                LEFT JOIN $table_groups AS parent_groups
-                      ON groups.group_parent_id = parent_groups.group_id
-                   WHERE groups.domain_id = $domain_id";
+                      ON grp.group_parent_id = parent_groups.group_id
+                   WHERE grp.domain_id = $domain_id";
           
 // Create "n-level" non-locking recursion
 $max_level = 3;

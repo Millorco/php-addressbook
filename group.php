@@ -150,7 +150,7 @@ else if($edit || $id)
   if($edit)
     $id = $selected[0];
 
-    $sql = "$select_groups AND groups.group_id = ?";
+    $sql = "$select_groups AND grp.group_id = ?";
     $result = $db_access->execute($sql, [$id]);
     $myrow = $db_access->fetchArray($result);
 
@@ -213,7 +213,7 @@ else if($edit || $id)
 }
 else
 {
-	$result = $db_access->execute($select_groups." ORDER BY groups.group_name");
+	$result = $db_access->execute($select_groups." ORDER BY grp.group_name");
 	$resultsnumber = $db_access->numRows($result);
 
 ?>

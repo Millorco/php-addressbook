@@ -27,7 +27,7 @@
       
     } else { // Fallback to ISO-8859-1
       $res = ($first ? "" : ";" ) . '"'.$res.'"';
-      print utf8_decode($res);
+      print mb_convert_encoding($res, "ISO-8859-1", "UTF-8");
     }
   
   }
@@ -104,7 +104,7 @@ $headers = array( 0 => "Name"
 
   add(ucfmsg($headers[0]), true);
 	for($i = 1; $i < count($headers); $i++) {
-	  add(ucfmsg(utf8_encode($headers[$i])));
+	  add(ucfmsg(mb_convert_encoding($headers[$i], "UTF-8", "ISO-8859-1")));
 	}
 	
   if($use_utf_16LE)

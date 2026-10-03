@@ -38,12 +38,14 @@ if(   isset($_POST['db_host'])
                       ,"TABLE group_list"
                       ,"TABLE address_in_groups"
                       ,"TABLE users"
+                      ,"INTO `month_lookup`"
                       );
    $replac_arr = array("TABLE ".$_POST['db_tbl_prefix']."addressbook"
                       ,"TABLE ".$_POST['db_tbl_prefix']."month_lookup"
                       ,"TABLE ".$_POST['db_tbl_prefix']."group_list"
                       ,"TABLE ".$_POST['db_tbl_prefix']."address_in_groups"
                       ,"TABLE ".$_POST['db_tbl_prefix']."users"
+                      ,"INTO `".$_POST['db_tbl_prefix']."month_lookup`"
                       );
    
    $sql_ddl_arr_pfx = str_replace($search_arr, $replac_arr, $sql_ddl_arr);

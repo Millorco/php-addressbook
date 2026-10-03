@@ -30,7 +30,7 @@ function getPref($key) {
 		return $_GET[$key];
 	} elseif(isset($_COOKIE[$cookie_prefix.$key])) {
 		return $_COOKIE[$cookie_prefix.$key];		
-	} elseif(isset($userlist[$username][$key])) {
+	} elseif(isset($username) && isset($userlist[$username][$key])) {
 		return $userlist[$username][$key];
 	} else {
 		return "";

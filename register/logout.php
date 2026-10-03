@@ -1,4 +1,4 @@
-<? 
+<?php 
 
 include"login_config.php";
 

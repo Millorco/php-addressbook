@@ -18,7 +18,7 @@ function getIfSetFromAddr($addr_array, $key) {
 function trimAll($r) {
   $res = array();
   foreach($r as $key => $val) {
-  	$res[$key] = trim($val);
+  	$res[$key] = ($val === null ? "" : trim($val));
   }
   return $res;
 }   
@@ -75,7 +75,8 @@ function saveAddress($addr_array, $group_name = "") {
 
     $fields = ['firstname', 'middlename', 'lastname', 'nickname', 'company', 'title', 'address', 'home', 'mobile', 'work', 'fax', 'email', 'email2', 'email3', 'homepage', 'aday', 'amonth', 'ayear', 'bday', 'bmonth', 'byear', 'address2', 'phone2', 'photo', 'notes'];
     foreach($fields as $field) {
-      $params[] = getIfSetFromAddr($addr_array, $field);
+      $value = getIfSetFromAddr($addr_array, $field);
+      $params[] = (in_array($field, ['aday', 'bday']) ? intval($value) : $value);
     }
 
     $sql = "INSERT INTO $table ( domain_id, id, firstname, middlename, lastname, nickname, company, title, address, home, mobile, work, fax, email, email2, email3, homepage, aday, amonth, ayear, bday, bmonth, byear, address2, phone2, photo, notes, created, modified)
@@ -120,7 +121,7 @@ function saveAddress($addr_array, $group_name = "") {
     $id = $rec['max_id'];
 
     if(!isset($addr_array['id']) && $group_name) {
-	$sql = "INSERT INTO $table_grp_adr SELECT ? domain_id, ? id, group_id, now(), now(), NULL FROM $table_groups WHERE group_name = ?";
+	$sql = "INSERT INTO $table_grp_adr (domain_id, id, group_id, created, modified, deprecated) SELECT ? domain_id, ? id, group_id, now(), now(), NULL FROM $table_groups WHERE group_name = ?";
 	$result = $db_access->execute($sql, [$domain_id, $id, $group_name]);
     }
     
@@ -190,8 +191,8 @@ function updateAddress($addr, $keep_photo = true) {
         $addr['firstname'], $addr['lastname'], $addr['middlename'], $addr['nickname'],
         $addr['company'], $addr['title'], $addr['address'], $addr['home'],
         $addr['mobile'], $addr['work'], $addr['fax'], $addr['email'],
-        $addr['email2'], $addr['email3'], $addr['homepage'], $addr['aday'],
-        $addr['amonth'], $addr['ayear'], $addr['bday'], $addr['bmonth'],
+        $addr['email2'], $addr['email3'], $addr['homepage'], intval($addr['aday']),
+        $addr['amonth'], $addr['ayear'], intval($addr['bday']), $addr['bmonth'],
         $addr['byear'], $addr['address2'], $addr['phone2'], $addr['notes']
       ];
       if(!$keep_photo) {
@@ -424,7 +425,7 @@ class Addresses {
 
     public static function withSearchString($searchstring, $alphabet = "") {
     	$instance = new self();
-    	$instance->loadBy($searchstring, $alphabet);
+    	$instance->loadBy('search', $searchstring, $alphabet);
     	return $instance;
     }
 

@@ -118,7 +118,7 @@ class LightOpenID
         return !!gethostbynamel($server);
     }
 
-    protected function request_curl($url, $method='GET', $params=array(), $update_claimed_id)
+    protected function request_curl($url, $method='GET', $params=array(), $update_claimed_id=false)
     {
         $params = http_build_query($params, '', '&');
         $curl = curl_init($url . ($method == 'GET' && $params ? '?' . $params : ''));
@@ -228,7 +228,7 @@ class LightOpenID
         return $headers;
     }
 
-    protected function request_streams($url, $method='GET', $params=array(), $update_claimed_id)
+    protected function request_streams($url, $method='GET', $params=array(), $update_claimed_id=false)
     {
         if(!$this->hostExists($url)) {
             throw new ErrorException("Could not connect to $url.", 404);
@@ -317,8 +317,16 @@ class LightOpenID
         $data = file_get_contents($url, false, $context);
         # This is a hack for providers who don't support HEAD requests.
         # It just creates the headers array for the last request in $this->headers.
-        if(isset($http_response_header)) {
-            $this->headers = $this->parse_header_array($http_response_header, $update_claimed_id);
+        # PHP 8.4+ provides http_get_last_response_headers(); the magic
+        # $http_response_header variable is deprecated since PHP 8.5.
+        if(function_exists('http_get_last_response_headers')) {
+            $response_headers = http_get_last_response_headers();
+        } else {
+            $magic_var = 'http_response_header';
+            $response_headers = isset($$magic_var) ? $$magic_var : null;
+        }
+        if(is_array($response_headers)) {
+            $this->headers = $this->parse_header_array($response_headers, $update_claimed_id);
         }
 
         return $data;

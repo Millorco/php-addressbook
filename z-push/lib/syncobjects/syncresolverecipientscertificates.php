@@ -52,7 +52,7 @@ class SyncRRCertificates extends SyncObject {
     public $certificate;
     public $minicertificate;
 
-    public function SyncRRCertificates() {
+    public function __construct() {
         $mapping = array (
             SYNC_RESOLVERECIPIENTS_STATUS                   => array (  self::STREAMER_VAR      => "status"),
             SYNC_RESOLVERECIPIENTS_CERTIFICATECOUNT         => array (  self::STREAMER_VAR      => "certificatecount"),
@@ -67,7 +67,7 @@ class SyncRRCertificates extends SyncObject {
                                                                         self::STREAMER_PROP     => self::STREAMER_TYPE_NO_CONTAINER)
         );
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 
 }

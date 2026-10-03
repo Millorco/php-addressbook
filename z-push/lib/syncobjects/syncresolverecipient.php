@@ -53,7 +53,7 @@ class SyncResolveRecipient extends SyncObject {
     public $certificates;
     public $pictures;
 
-    public function SyncResolveRecipient() {
+    public function __construct() {
         $mapping = array (
             SYNC_RESOLVERECIPIENTS_TYPE                     => array (  self::STREAMER_VAR      => "type"),
             SYNC_RESOLVERECIPIENTS_DISPLAYNAME              => array (  self::STREAMER_VAR      => "displayname"),
@@ -70,7 +70,7 @@ class SyncResolveRecipient extends SyncObject {
                                                                         self::STREAMER_ARRAY    => SYNC_RESOLVERECIPIENTS_PICTURE),
         );
 
-        parent::SyncObject($mapping);
+        parent::__construct($mapping);
     }
 
 }

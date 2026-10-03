@@ -8,8 +8,8 @@ To run the full test suite in an environment that mimics the CI setup, you can u
 
 **Prerequisites:**
 
-*   **PHP 5.4:** You must have PHP 5.4 installed and available in your system's PATH.
-*   **MySQL 5.5:** A MySQL 5.5 server must be running.
+*   **PHP:** PHP with the `mysqli` extension must be installed and available in your system's PATH (verified with PHP 8.5; the CI still covers PHP 5.4+).
+*   **MySQL:** A MySQL server must be running (verified with MySQL 26.7; the CI still covers MySQL 5.5).
 *   **Database User:** A MySQL user named `root` with the password `root` must exist and have privileges to create and drop databases.
 
 **Usage:**

@@ -30,7 +30,7 @@
       
     } else { // Fallback to ISO-8859-1
       $res = ($first ? "" : ";" ) . '"'.$res.'"';
-      print utf8_decode($res);
+      print mb_convert_encoding($res, "ISO-8859-1", "UTF-8");
     }
   
   }
